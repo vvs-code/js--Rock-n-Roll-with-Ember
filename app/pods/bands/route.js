@@ -1,8 +1,5 @@
 import Ember from 'ember';
-
-var Band = Ember.Object.extend({
-  name: ''
-});
+import Band from '../band/model';
 
 var ledZeppelin = Band.create({ name: 'Led Zeppelin' });
 var pearlJam = Band.create({ name: 'Pearl Jam' });
