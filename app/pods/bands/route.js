@@ -12,7 +12,7 @@ function wait(promise, delay) {
 
 export default Ember.Route.extend({
   model: function() {
-    return wait(this.store.find('band'), 3*1000);
+    return wait(this.store.find('band'), 0); //wait used to check loader
   },
 
   actions: {

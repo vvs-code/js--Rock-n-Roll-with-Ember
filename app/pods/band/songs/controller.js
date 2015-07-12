@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: ['band'],
   sortBy: 'ratingDesc',
   searchTerm: '',
   queryParams: {
