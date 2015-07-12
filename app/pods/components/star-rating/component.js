@@ -29,7 +29,7 @@ export default Ember.Component.extend({
       this.sendAction('setAction', {
         item: this.get('item'),
         rating: newRating
-      })
+      });
     }
   }
 });

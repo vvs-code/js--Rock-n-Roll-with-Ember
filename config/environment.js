@@ -20,15 +20,19 @@ module.exports = function(environment) {
     },
 
     contentSecurityPolicy: {
+       'connect-src': "'self' localhost:* api.rockandrollwithemberjs.com:*",
       'default-src': "'none'",
       'script-src': "'self' 'unsafe-inline' 'unsafe-eval'",
-      'connect-src': "'self'",
       'img-src': "'self'",
       'style-src': "'self' 'unsafe-inline'"
     }
   };
 
   if (environment === 'development') {
+    ENV.apiHost = 'http://api.rockandrollwithemberjs.com';
+    ENV.contentSecurityPolicy['script-src'] = "'self' 'unsafe-eval'";
+    ENV.APP.LOG_ACTIVE_GENERATION = true;
+    ENV.APP.LOG_VIEW_LOOKUPS = true;
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
