@@ -1,14 +1,30 @@
 <div class="row">
-  <ul class="list-group songs">
-    <li class="list-group-item">
-      {{input type="text" class="new-band" placeholder="New song" value=title}}
-      <button class="btn btn-primary btn-sm new-song-button" disabled={{isAddButtonDisabled}} {{action "createSong"}}>Add</button>
-    </li>
-    {{#each model as |song|}}
-      <li class="list-group-item">
-        {{song.title}} by <em>{{song.band}}</em>
-          {{star-rating item=song rating=song.rating setAction="updateRating"}}
-      </li>
-    {{/each}}
-  </ul>
+    <ul class="list-group songs">
+      {{#if canCreateSongs}}
+          <li class="list-group-item">
+              <form class="new-song-form" {{action 'createSong' on='submit'}}>
+                {{input type="text" class="new-band" placeholder="New song" value=title}}
+                  <button class="btn btn-primary btn-sm new-song-button"
+                          disabled={{isAddButtonDisabled}} {{action "createSong"}}>Add
+                  </button>
+              </form>
+          </li>
+      {{/if}}
+
+      {{#each model as |song|}}
+          <li class="list-group-item">
+            {{song.title}} by <em>{{song.band}}</em>
+            {{star-rating item=song rating=song.rating setAction="updateRating"}}
+          </li>
+      {{/each}}
+
+      {{#if noSongs}}
+          <div class="list-group-item empty-list">
+              <div class="empty-message">
+                  There are no songs yet. Why don't you <a href="#" {{action
+              "enableSongCreation"}}>create one?</a>
+              </div>
+          </div>
+      {{/if}}
+    </ul>
 </div>
