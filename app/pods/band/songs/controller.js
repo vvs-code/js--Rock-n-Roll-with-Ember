@@ -1,15 +1,21 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  needs: ['band'],
+  sortBy: 'ratingDesc',
+  searchTerm: '',
+  queryParams: {
+    sortBy: 'sort',
+    searchTerm: 's'
+  },
+
   songCreationStarted: false,
   title: '',
-
   isAddButtonDisabled: Ember.computed.empty('title'),
 
   noSongs: Ember.computed.empty('model'),
   canCreateSongs: Ember.computed.or('model.length', 'songCreationStarted'),
 
-  sortBy: 'ratingDesc',
   sortProperties: function() {
     var options = {
       "ratingDesc": "rating:desc,title:asc",
@@ -19,10 +25,9 @@ export default Ember.Controller.extend({
     };
     return options[this.get('sortBy')].split(',');
   }.property('sortBy'),
+
   sortedSongs: Ember.computed.sort('matchingSongs', 'sortProperties'),
 
-
-  searchTerm: '',
   matchingSongs: function() {
     var searchTerm = this.get('searchTerm').toLowerCase();
     return this.get('model').filter(function(song) {
