@@ -157,8 +157,9 @@ html, body {
 .error-message { text-align: center; color: #e22626; line-height: 100px;
 }
 .spinner {
-  background: url('/images/ajax-loader.gif') no-repeat; height: 31px;
-  width: 31px;
+  background: url('/images/ajax-loader.gif') no-repeat;
+  height: 100px;
+  width: 100px;
   margin: 0 auto;
 }
 
