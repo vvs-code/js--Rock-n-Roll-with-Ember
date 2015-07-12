@@ -9,10 +9,11 @@ Router.map(function() {
   this.resource('bands', function() {
     this.resource('band', { path: ':slug' }, function() {
       this.route('songs');
+      this.route('details');
+
     });
   });
-
-
+  this.route('band', function() {});
 });
 
 export default Router;

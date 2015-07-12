@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Object.extend({
   name: '',
+  description: '',
   language: '',
   slug: function() {
     return this.get(

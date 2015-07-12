@@ -18,9 +18,21 @@ var pretender = Song.create({ title: 'The Pretender', band: 'Foo Fighters', rati
 
 
 
-var ledZeppelin = Band.create({ name: 'Led Zeppelin', songs: [blackDog] });
-var pearlJam = Band.create({ name: 'Pearl Jam', songs: [daughter, yellowLedbetter] });
-var fooFighters = Band.create({ name: 'Foo Fighters', songs: [pretender] });
+var ledZeppelin = Band.create({
+  name: 'Led Zeppelin',
+  description: 'Some description',
+  songs: [blackDog]
+});
+var pearlJam = Band.create({
+  name: 'Pearl Jam',
+  description: 'Some description',
+  songs: [daughter, yellowLedbetter]
+});
+var fooFighters = Band.create({
+  name: 'Foo Fighters',
+  description: 'Some description',
+  songs: [pretender]
+});
 
 var bands = [ledZeppelin, pearlJam, fooFighters];
 
