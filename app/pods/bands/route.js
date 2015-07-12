@@ -27,5 +27,15 @@ var bands = [ledZeppelin, pearlJam, fooFighters];
 export default Ember.Route.extend({
   model: function() {
     return bands;
+  },
+
+  actions: {
+    createBand: function() {
+      var name = this.get('controller.name');
+      if(name)  {
+        bands.pushObject(Band.create({name}));
+        this.set('controller.name', '');
+      }
+    }
   }
 });
