@@ -13,7 +13,6 @@ Router.map(function() {
 
     });
   });
-  this.route('band', function() {});
 });
 
 export default Router;
