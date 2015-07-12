@@ -19,6 +19,13 @@ export default Ember.Route.extend({
 
         this.set('controller.title', '');
       }
+    },
+
+    updateRating: function(params) {
+      var song = params.item,
+        rating = params.rating;
+
+      song.set('rating', rating);
     }
   }
 });
