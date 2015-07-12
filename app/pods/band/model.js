@@ -9,5 +9,12 @@ export default Ember.Object.extend({
   }.property('name'),
   site: function() {
     return 'http://bands.com/' + this.get('slug') + '.' + this.get('language');
-  }.property('slug', 'language')
+  }.property('slug', 'language'),
+
+  /*---*/
+  setupSongs: function() {
+    if(!this.get('songs')) {
+      this.set('songs', []);
+    }
+  }.on('init')
 });
