@@ -101,3 +101,7 @@ html, body {
 .band-description-header {
   margin-bottom: 20px;
 }
+
+.input-group-btn {
+  display: inline-block;
+}

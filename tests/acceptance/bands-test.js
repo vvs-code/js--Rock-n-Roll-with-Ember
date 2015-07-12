@@ -149,3 +149,38 @@ test('Sort songs in various ways', function(assert) {
     assertTrimmedText(assert, '.song:last', 'Spinning in Daffodils by Them Crooked Vultures', "The last song is the highest ranked, last in the alphabet");
   });
 });
+
+
+test('Search songs', function(assert) {
+  server = new Pretender(function() {
+    this.get('/bands', function(request) {
+      var resp = JSON.stringify({
+        bands: [
+          { id: 1, name: 'Them Crooked Vultures', songs: [1, 2, 3, 4, 5] }
+        ],
+        songs: [
+          { id: 1, title: 'Elephants', rating: 5 },
+          { id: 2, title: 'New Fang', rating: 4 },
+          { id: 3, title: 'Mind Eraser, No Chaser', rating: 4 },
+          { id: 4, title: 'Spinning in Daffodils', rating: 5 },
+          { id: 5, title: 'No One Loves Me & Neither Do I', rating: 3 },
+        ]
+      });
+      return [200, { "Content-Type": "application/json" }, resp];
+    });
+
+  });
+
+  visit('/bands/1');
+  fillIn('.search-field', 'no');
+
+  andThen(function() {
+    assertLength(assert, '.song', 2, "The songs matching the search term are displayed");
+  });
+
+  click('button.sort-title-desc');
+  andThen(function() {
+    assertTrimmedText(assert, '.song:first', 'No One Loves Me & Neither Do I by Them Crooked Vultures', "A matching song that comes later in the alphahet appears on top");
+    assertTrimmedText(assert, '.song:last', 'Mind Eraser, No Chaser by Them Crooked Vultures', "A matching song that comes sooner in the alphahet appears at the bottom ");
+  });
+});
