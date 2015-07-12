@@ -3,7 +3,7 @@
       {{#if canCreateSongs}}
           <li class="list-group-item">
               <form class="new-song-form" {{action 'createSong' on='submit'}}>
-                {{input type="text" class="new-band" placeholder="New song" value=title}}
+                {{input type="text" class="new-song" placeholder="New song" value=title}}
                   <button class="btn btn-primary btn-sm new-song-button"
                           disabled={{isAddButtonDisabled}} {{action "createSong"}}>Add
                   </button>
@@ -12,7 +12,7 @@
       {{/if}}
 
       {{#each model as |song|}}
-          <li class="list-group-item">
+          <li class="list-group-item song">
             {{song.title}} by <em>{{song.band.name}}</em>
             {{star-rating item=song rating=song.rating setAction="updateRating"}}
           </li>
@@ -21,8 +21,8 @@
       {{#if noSongs}}
           <div class="list-group-item empty-list">
               <div class="empty-message">
-                  There are no songs yet. Why don't you <a href="#" {{action
-              "enableSongCreation"}}>create one?</a>
+                  There are no songs yet. Why don't you <a href="#" class="" {{action
+              "enableSongCreation"}}>create one</a>?
               </div>
           </div>
       {{/if}}

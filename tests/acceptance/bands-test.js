@@ -63,6 +63,41 @@ test('Create a new band', function(assert) {
   andThen(function() {
     assert.equal(find('.band-link').length, 2, "All band links are rendered");
     assert.equal(find('.band-link:last').text().trim(), 'Long Distance Calling', "Created band appears at the end of the list");
-    assert.equal(find('.nav a.active:contains("Songs")').length, 1,  "The Songs tab is active");
+    assert.equal(find('.nav a.active:contains("Songs")').length, 1, "The Songs tab is active");
+  });
+});
+
+
+test('Create a new song in two steps', function(assert) {
+  server = new Pretender(function() {
+    this.get('/bands', function(request) {
+      var bands = JSON.stringify({
+        bands: [
+          { id: 1, name: 'Radiohead' }
+        ]
+      });
+      return [200, { "Content-Type": "application/json" }, bands];
+    });
+
+
+    this.post('/songs', function(request) {
+      var song = JSON.stringify({
+        song: {
+          id: 1,
+          title: 'Killer Cars'
+        }
+      });
+      return [200, { "Content-Type": "application/json" }, song];
+    });
+  });
+
+  visit('/bands');
+  click('.band-link:contains("Radiohead")');
+  click('a:contains("create one")');
+  fillIn('.new-song', 'Killer Cars');
+  triggerEvent('.new-song-form', 'submit');
+
+  andThen(function() {
+    assert.equal(find('.songs .song:contains("Killer Cars")').length, 1, "Creates the song and displays it in the list");
   });
 });
